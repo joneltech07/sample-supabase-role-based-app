@@ -1,5 +1,6 @@
 <!-- components/Navbar.vue -->
 <script setup>
+const supabase = useSupabaseClient()
 const profile = useProfileState()
 
 const links = computed(() => {
@@ -18,6 +19,11 @@ const links = computed(() => {
     { name: 'Profile', to: '/profile' }
   ]
 })
+
+const logout = async () => {
+  await supabase.auth.signOut()
+  navigateTo('/login')
+}
 </script>
 
 <template>
@@ -26,4 +32,7 @@ const links = computed(() => {
       {{ link.name }}
     </NuxtLink>
   </nav>
+  <div>
+    <button @click="logout">Logout</button>
+  </div>
 </template>

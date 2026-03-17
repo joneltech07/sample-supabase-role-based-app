@@ -9,6 +9,10 @@ const loginWithGoogle = async () => {
     }
   })
 }
+
+definePageMeta({
+  middleware: 'guest'
+})
 </script>
 
 <template>

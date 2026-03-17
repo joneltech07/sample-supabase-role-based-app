@@ -1,16 +1,19 @@
 <!-- layouts/default.vue -->
 <script setup>
-const supabase = useSupabaseClient()
-const user = useSupabaseUser()
-const profile = useProfileState()
-
 onMounted(async () => {
-  if (!user.value) return
+  const supabase = useSupabaseClient()
+  const profile = useProfileState()
+
+  const {
+    data: { session }
+  } = await supabase.auth.getSession()
+
+  if (!session) return
 
   const { data } = await supabase
     .from('profiles')
     .select('*')
-    .eq('id', user.value.sub)
+    .eq('id', session.user.id)
     .single()
 
   profile.value = data
@@ -19,7 +22,6 @@ onMounted(async () => {
 
 <template>
   <div>
-    <Navbar />
     <slot />
   </div>
 </template>

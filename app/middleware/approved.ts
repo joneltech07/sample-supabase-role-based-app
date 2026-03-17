@@ -1,7 +1,14 @@
 export default defineNuxtRouteMiddleware(async () => {
 	const user = useSupabaseUser()
+	const supabase = useSupabaseClient()
+	const { data: { session } } = await supabase.auth.getSession()
 
-	if (!user.value) {
+	// ⛔ WAIT until user is resolved
+	if (user.value === null) {
+		return
+	}
+
+	if (!session) {
 		return navigateTo('/login')
 	}
 

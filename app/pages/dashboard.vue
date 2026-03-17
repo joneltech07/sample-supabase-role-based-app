@@ -1,12 +1,7 @@
 <script setup>
-const user = useSupabaseUser()
-const supabase = useSupabaseClient()
-const profile = await useUserProfile()
-const instruments = await useInstruments()
+import Authenticated from '~/layouts/authenticated.vue'
 
-const logout = async () => {
-  await supabase.auth.signOut()
-}
+const user = useSupabaseUser()
 
 definePageMeta({
   middleware: 'approved'
@@ -14,9 +9,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div v-if="user">Welcome {{ user.user_metadata.full_name }}</div>
-
-  <div>
-    <button @click="logout">Logout</button>
-  </div>
+  <Authenticated>
+    <div v-if="user">Welcome {{ user.user_metadata.full_name }}</div>
+  </Authenticated>
 </template>
