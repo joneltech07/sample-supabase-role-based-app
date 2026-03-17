@@ -7,8 +7,10 @@ export default defineNuxtRouteMiddleware(async () => {
 
 	const profile = await useUserProfile()
 
-	if (!profile) {
-		return navigateTo('/pending')
+	if (!profile) return navigateTo('/login')
+
+	if (profile.status === 'onboarding') {
+		return navigateTo('/onboarding')
 	}
 
 	if (profile.status === 'pending') {

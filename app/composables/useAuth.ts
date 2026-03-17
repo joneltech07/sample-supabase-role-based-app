@@ -1,3 +1,5 @@
+import type { Profile } from "~/types/profile"
+
 export const useUserProfile = async () => {
 	const supabase = useSupabaseClient()
 	const user = useSupabaseUser()
@@ -10,7 +12,7 @@ export const useUserProfile = async () => {
 		.from('profiles')
 		.select('*')
 		.eq('id', user.value.sub)
-		.maybeSingle()
+		.single<Profile>()
 
 	if (error) {
 		console.error(error)
