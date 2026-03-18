@@ -2,6 +2,10 @@
 import Authenticated from '~/layouts/authenticated.vue'
 
 const profile = useProfileState()
+
+definePageMeta({
+  middleware: 'approved'
+})
 </script>
 
 <template>

@@ -3,11 +3,7 @@ export default defineNuxtRouteMiddleware(async () => {
 
 	if (!profile) return navigateTo('/login')
 
-	if (profile.status !== 'approved') {
-		return navigateTo('/pending')
-	}
-
-	if (profile.role !== 'admin') {
+	if (profile.status === 'approved') {
 		return navigateTo('/dashboard')
 	}
 })

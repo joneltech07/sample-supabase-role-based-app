@@ -4,3 +4,9 @@
     <p>Your account is waiting for admin approval.</p>
   </div>
 </template>
+
+<script setup lang="ts">
+definePageMeta({
+  middleware: 'pending'
+})
+</script>

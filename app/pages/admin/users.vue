@@ -1,14 +1,11 @@
 <template>
-  <Authenticated>
-    <Approval />
-  </Authenticated>
+  <Approval />
 </template>
 
 <script setup lang="ts">
-import Authenticated from '~/layouts/authenticated.vue'
-
 // pages/admin/users.vue
 definePageMeta({
-  middleware: 'admin'
+  layout: 'authenticated',
+  middleware: ['approved', 'admin']
 })
 </script>
